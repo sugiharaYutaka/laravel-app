@@ -11,12 +11,12 @@
                 <div class="video-container">
                     <div class="letterbox">
                         <video class="rounded-3 ratio ratio-16x9" id="video" style="width:100%;" class="video-js vjs-default-skin"
-                        src="$video_url" controls autoplay>
+                        src="{{ asset('live/' . session('stream_key') . '.m3u8') }}" controls autoplay>
 
                             <script type="text/javascript">
                                 if(Hls.isSupported)
                                 {
-                                var src = "{{ $video_url }}";
+                                var src = "{{ asset('live/' . session('stream_key') . '.m3u8') }}";
                                 var video = document.getElementById("video");
                                 var hls = new Hls();
                                 hls.loadSource(src);

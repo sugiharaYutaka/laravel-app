@@ -32,7 +32,7 @@ class AccountController extends Controller
         }
 
         if ($request->hasFile('user_icon')) {
-            $validateData['user_icon'] = 'image|max:1024';
+            $validateData['user_icon'] = 'image|max:5120000';
         }
         $validator = Validator::make($request->all(), $validateData);
 

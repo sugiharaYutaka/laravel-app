@@ -18,8 +18,10 @@ class UploadVideoController extends Controller
         $thumbnailPath = public_path('Thumbnail') . $thumbnailName;
         $videoPath = public_path('Video') . $videoName;
         //$ffmpegCommand = "ffmpeg -i " . $videoPath . " -ss 00:00:01.000 -vframes 1 " .$thumbnailPath;
-        $ffmpegCommand = "C:\\xampp\\htdocs\\bin\\ffmpeg.exe -i  C:\\test-app6\\public\\Video\\" . $videoName . " -ss 00:00:01.000 -vframes 1 C:\\test-app6\\public\\Thumbnail\\" .$thumbnailName ;
-        $ffmpegCommand = "D:\\xampp\\htdocs\\bin\\ffmpeg.exe -i  D:\\test-app6\\public\\Video\\" . $videoName . " -ss 00:00:01.000 -vframes 1 D:\\test-app6\\public\\Thumbnail\\" .$thumbnailName ;
+        //$ffmpegCommand = "C:\\xampp\\htdocs\\bin\\ffmpeg.exe -i  C:\\test-app6\\public\\Video\\" . $videoName . " -ss 00:00:01.000 -vframes 1 C:\\test-app6\\public\\Thumbnail\\" .$thumbnailName ;
+        //$ffmpegCommand = "D:\\xampp\\htdocs\\bin\\ffmpeg.exe -i  D:\\test-app6\\public\\Video\\" . $videoName . " -ss 00:00:01.000 -vframes 1 D:\\test-app6\\public\\Thumbnail\\" .$thumbnailName ;
+        //$ffmpegCommand = "/usr/bin/ffmpeg -i  " . $videoPath . " -ss 00:00:01.000 -vframes 1" .$thumbnailPath ;
+        $ffmpegCommand = "/usr/bin/ffmpeg -i  /laravelApp/test-app6/laravel-app/public/Video/" . $videoName . " -ss 00:00:01.000 -vframes 1 /laravelApp/test-app6/laravel-app/public/Thumbnail/" .$thumbnailName;
 
         // FFmpegコマンドを実行
         shell_exec($ffmpegCommand);
@@ -28,17 +30,17 @@ class UploadVideoController extends Controller
     {
 
         $redirectTo = "/uploadVideo";
-
+        $validateData = null;
         if ($request->hasFile('video')) {
-            $validateData['video'] = 'required|mimetypes:video/*|max:307200';
+            $this->$validateData['video'] = 'required|mimetypes:video/*|max:307200';
         }
         if ($request->hasFile('thumbnail')) {
-            $validateData['thumbnail'] = 'image|max:5120';
+            $this->$validateData['thumbnail'] = 'image|max:5120';
         }
         if ($request->hasFile('title')) {
-            $validateData['title'] = 'required|string|max:65';
+            $this->$validateData['title'] = 'required|string|max:65';
         }
-        $validator = Validator::make($request->all(), $validateData);
+        $validator = Validator::make($request->all(), $this->$validateData);
 
         if ($validator->fails()) {
             if( $validator->errors()->get('video'))
@@ -73,8 +75,8 @@ class UploadVideoController extends Controller
         }
         else
         {
-            $thumbnailName = $videoName . 'thumbnail.png';
-            $this->createThumbnail($videoName, $thumbnailName);
+            $this->$thumbnailName = $videoName . 'thumbnail.png';
+            $this->createThumbnail($videoName, $this->$thumbnailName);
         }
 
         $success_message = "動画がアップロードされました";
@@ -82,7 +84,7 @@ class UploadVideoController extends Controller
 
         Video::create([
             'filename' => $videoName,
-            'thumnail_name' => $thumbnailName,
+            'thumnail_name' => $this->$thumbnailName,
             'title' => $request->title,
             'email' => session('email'),
         ]);
