@@ -1,0 +1,93 @@
+div {
+    margin: 0;
+}
+button:hover{
+  box-shadow:0 1px 10px 0 rgba(47, 79, 79, 0.4);
+}
+.img-thumbnail.icon:hover{
+  transform:scale(1.05,1.05);
+  filter: saturate(200%);
+}
+.imgBox{
+  overflow:hidden;
+  width:100%;
+  margin:0 auto;
+  border-radius: 10px;
+}
+.v-thumb{
+  width:100%;
+  height:100%;
+}
+.v-thumb:hover{
+  transition: 0.5s ease;
+  transform:scale(1.05,1.05);
+  filter: saturate(200%);
+}
+.textInput
+{
+  outline: none;
+  border: none;
+  border-bottom: 2px solid #999;
+  margin:0;
+}
+.center{
+  text-align: center;
+}
+.btn.border-top.border-bottom.my-2:visited{
+  background-color: #5d5d5d;
+  color: rgb(37, 37, 37);
+}
+.btn.border-top.border-bottom.my-2:hover{
+  background-color: #5a5a5ab7;
+  color: rgb(255, 255, 255);
+}
+@media(max-width:750px){
+  .body-margin-top{
+
+    margin-top: 30vh;
+  }
+}
+@media(min-width:751px){
+  .body-margin-top{
+
+    margin-top: 10vh;
+  }
+}
+.video-container {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  .letterbox {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    padding-top: 56.25%; /* 16:9のアスペクト比 */
+  }
+
+  .letterbox video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .letterbox img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .comments {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 10px;
+  }
